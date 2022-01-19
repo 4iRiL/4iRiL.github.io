@@ -6,16 +6,20 @@ html,body{
     display: flex;
     flex-direction: column;
     margin: auto;
-    outline: 1px solid black;
+    border: 5px solid rgb(182, 109, 37);
     width: 80%;
     height: 70%;
     min-height: 500px;
     justify-content: space-evenly;
     max-width: 500px;
+    border-radius: 20%;
+    box-shadow: 0px 3px 0px 2px rgb(92, 66, 18), 3px 7px 4px 2px rgb(49, 39, 39) ;
+    background: transparent;
 }
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-
+    /* background: linear-gradient(#205300 0%,#346e03 70%, #205300 100%); */
+    background: radial-gradient(#346e03, #205300);
 }
 
 #casic{
@@ -25,21 +29,27 @@ body{
 }
 
 .carts{
-    width: 50%;
-    height: 100px;
-    outline: 1px solid gray;
+    width: fit-content;
+    height: fit-content;
+    outline: 1px solid rgb(0, 0, 0);
     margin: 10px;
+    padding: 10px;
+    background: #e7e7e78c;
+
 }
 .total{
-    width: 10%; 
-    height: 100px;
+    width: fit-content; 
+    height: fit-content;
     /* outline: 1px solid gray; */
     margin: 10px;
+    /* text-shadow: 0px 0px 0px rgb(0, 0, 0); */
+    /* font-weight: bold; */
 }
 .help{
     display: flex;
     flex-direction: row;
-    justify-content: center ;
+    justify-content: center;
+    align-items: center
 }
 #actions{
     display: flex;
@@ -47,15 +57,18 @@ body{
     margin-top: 20px;
 }
 #actions > div{
-    outline: 1px solid gray;
+    outline: 1px solid rgb(0, 0, 0);
     width: fit-content;
     margin: 5px;
-    padding: 2px;
+    padding: 3px;
     user-select: none;
     cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px 1px black;
 }
-#casic, #me{
-    /* outline: 1px solid lightblue; */
+#actions > div:active{
+    transform: translate(0px, 2px);
+    box-shadow: 0px 1px 2px -1px black;
 
 }
 #head{

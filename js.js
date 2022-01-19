@@ -42,6 +42,7 @@ let generate = () => {
         if(countEbuchiy > 100){
             used = []
             console.log('Тут начался какой-то пиздец, поэтому я взял новую колоду')
+            countEbuchiy = 0
         }
         generate()
     }else{
