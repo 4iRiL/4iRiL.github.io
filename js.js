@@ -111,7 +111,7 @@ let gameStart = ()=>{
     generate()
     hiddenCart = cart
     casicTotal += cartValue
-    jQuery('<span/>', {'id':'hidden'}).text('hidden').appendTo('.casicCarts')
+    jQuery('<span/>', {'id':'hidden'}).text('H').appendTo('.casicCarts')
 
     //Достаем карту для игрока
 
@@ -210,6 +210,8 @@ let bet = () => {
         canPlay = true
         canBet = false
         gameStart()
+        $('.carts').css('display', 'block')
+        $('.total').css('display', 'inline')
     }
 
     
@@ -253,14 +255,23 @@ let newGame = () => {
 
     $('#restartButton').remove()
     jQuery('<div/>', {
-        'class' : 'action1',
+        'class' : 'action1 button',
         'onclick': 'take()',
-    }).text('Взять карту').appendTo($('#actions'))
+    }).text('Take').appendTo($('#actions'))
     
     jQuery('<div/>', {
-        'class' : 'action2',
+        'class' : 'action2 button',
         'onclick': 'pass()',
-    }).text('Пас').appendTo($('#actions'))
+    }).text('Pass').appendTo($('#actions'))
     
+    
+    $('.carts').css('display', 'none')
+    $('.total').css('display', 'none')
 
+}
+
+let countOchko = 0
+let ochko = () => {
+    countOchko == 0 ? $('#to').text('Очко') : $('#to').text('Blackjack')
+    countOchko == 0 ? countOchko++ : countOchko--
 }

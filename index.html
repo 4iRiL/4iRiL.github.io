@@ -13,7 +13,8 @@
 
     <div id="wrapper">
         <div id='head'>
-        <span id='to'>ОЧКО</span>
+        <span id='to' onclick="ochko()"> 
+        Blackjack </span>
         <span id='money'> $10.000 </span>
         <span id="beted"></span>
         </div>
@@ -33,22 +34,24 @@
             <div class="help">
 
                 <div class="carts myCarts">
-
                 </div>
                 <span class="total" id='myTotal'> 0 </span>
 
             </div>
 
             <div id="actions">
-                <div class="action1" onclick="take()">Взять карту</div>
-                <div class="action2" onclick="pass()">Пас</div>
+                <div class="action1 button" onclick="take()">Take</div>
+                <div class="action2 button" onclick="pass()">Pass</div>
             </div>
         </div>
+
+        <div id='idkName'>
+            <input type="text" id="betInput">
+            <!-- <input type="button" value="Bet" class="button" onclick='bet()'> -->
+            <div class='button' onclick="bet()">Bet</div>
+        </div>
     </div>
-    <div id='idkName'>
-        <input type="text" id="betInput">
-        <input type="button" value="Поставить" onclick='bet()'>
-    </div>
+    
     
 </body>
 </html>
