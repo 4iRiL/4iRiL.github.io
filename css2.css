@@ -1,7 +1,7 @@
 html,body{
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+    height: 99%;
+    width: 99%;
+    overflow-x: hidden;
     user-select: none;
 }
 #wrapper{
@@ -53,6 +53,8 @@ html,body{
 body{
     background-color: #1D1B26;
     font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
 }
 
 #casic{
