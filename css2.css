@@ -52,8 +52,7 @@ html,body{
 
 body{
     background-color: #1D1B26;
-    font-family: 'Montserrat';
-
+    font-family: 'Montserrat', sans-serif;
 }
 
 #casic{

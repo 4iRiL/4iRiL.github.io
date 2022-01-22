@@ -20,8 +20,9 @@ html,body{
 }
 body{
     background: radial-gradient(#3e8105, #1c4800);
-    font-family: 'Montserrat';
     user-select: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600px;
 }
 
 #casic{
