@@ -19,9 +19,6 @@ html,body{
     background: transparent;
 }
 body{
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif;
-     */
-    /* background: linear-gradient(#205300 0%,#346e03 70%, #205300 100%); */
     background: radial-gradient(#3e8105, #1c4800);
     font-family: 'Montserrat';
     user-select: none;
@@ -217,3 +214,8 @@ body{
     content: '♥';
 }
 
+@keyframes blind{
+    0%{height: 0px;}
+    40%{height: 100%;top: 0px}
+    100%{top: 100%;height: 100%}
+}

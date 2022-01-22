@@ -274,20 +274,40 @@ let newGame = () => {
 }
 
 let countOchko = 0
-let ochko = () => {
+async function ochko(){
     if(countOchko == 0){
+        makeBlind()
+        await sleep(1000)
         $('#to').text(' Очко ')
         countOchko++
         $('link[rel="stylesheet"]').remove()
         $('head').append('<link rel="stylesheet" href="css2.css">')
     }
     else{
+        makeBlind()
+        await sleep(1000)
         $('#to').text('Blackjack')
         countOchko--
         $('link[rel="stylesheet"]').remove()
         $('head').append('<link rel="stylesheet" href="css.css">')
     }
 }
+let makeBlind = () => {
+    let color = countOchko == 0 ? '#1D1B26' : '#3e8105'
+    jQuery('<div/>').css({
+        'width' : '100%',
+        'height' : '0px',
+        'background' : color,
+        'position' : 'absolute',
+        'top' : '0px',
+        'left' : '0px',
+        'animation' : 'blind 2.5s cubic-bezier(0.63, 0.09, 0.61, 0.74)',
+    }).appendTo($('body'))
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
 let canUse = []
 let someCart
 let prices = []
@@ -357,7 +377,3 @@ let sumAll = () => {
     return sumOfAll
 }
 
-let someShit = () => {
-    $('link[rel="stylesheet"]').remove()
-    $('head').append('<link rel="stylesheet" href="css.css">')
-}
