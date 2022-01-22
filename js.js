@@ -21,7 +21,7 @@ function rng(min, max) {
 let suit = {
     1 : '♦',//'diamonds',
     2 : '♥',//'hearts',
-    3 : '♦',//'clubs',
+    3 : '♣',//'clubs',
     4 : '♠',//'spades',
 }
 let cart
@@ -37,7 +37,7 @@ let generate = () => {
     value = number[cartValue]
     cart = value + ' ' +  suit[rng(1, 4)]
     if(used.includes(cart)){
-        console.log('Карта уже есть на столе, шуллер ебучий')
+        // console.log('Карта уже есть на столе, шуллер ебучий')
         countEbuchiy++
         if(countEbuchiy > 100){
             used = []
@@ -59,15 +59,25 @@ let casicTotal = 0
 let lose = false
 let win = false
 let draw = false
+let haveAce = false
 let take = () => {
+
+    
+
     if(canPlay == false){
         return console.log('Сделай ставку, чтобы начать игру')
     }
     generate()
+
     if(myTotal < 11 && cartValue == 1){
         cartValue = 11 
+        haveAce = true
     }
     myTotal += cartValue
+    if(haveAce == true && myTotal > 21){
+        myTotal -= 10
+        haveAce = false
+    }
     myTotal > 21 ? lose = true : -1
     jQuery('<span/>',{'class': 'cart'}).text(cart).appendTo('.myCarts')
 
@@ -92,12 +102,13 @@ let restartButton = ()=>{
     $('.action2').remove()
     $('.action3').remove()
 
-    jQuery('<input>', {
-        'type': 'button',
-        'value': 'Начать новую партию',
+    jQuery('<div/>', {
+        //'type': 'button',
+        //'value': 'Начать новую партию',
         'onclick': 'newGame()',
-        'id': 'restartButton'
-    }).appendTo($('#actions'))
+        'id': 'restartButton',
+        'class' : 'button'
+    }).text('New game').appendTo($('#actions'))
 }
 let hiddenCart
 let gameStart = ()=>{
@@ -118,20 +129,10 @@ let gameStart = ()=>{
     take()
     take()
 
-    // if(casicTotal == 21 && myTotal < 21){
-    //     console.log('Ты проиграл')
-    //     $('#hidden').text(hiddenCart)
-    //     $('#casicTotal').text(casicTotal)
-    //     lose = true
-    //     giveMoney()
-    // }
-    // if(myTotal == 21 && casicTotal < 21){
-    //     console.log('Ты выиграл')
-    //     $('#hidden').text(hiddenCart)
-    //     $('#casicTotal').text(casicTotal)
-    //     win = true
-    //     giveMoney()
-    // }
+    if(casicTotal == 21 && myTotal < casicTotal){
+        lose = true
+        giveMoney()
+    }
     if(myTotal == 21 && casicTotal == 21){
         console.log('БЛЯ, ТЫ ПРИКИНЬ! И У ТЕБЯ И У БОТА ЕБУЧЕГО НА ПЕРВОЙ РАСКИДКЕ 21!!!')
         draw = true
@@ -189,12 +190,12 @@ let countDolbaeb = 0
 let canPlay = false
 let canBet = true
 let bet = () => {
+
+    restartCount == 1 ? newGame() : -1
     if(canBet == false){
         return console.log('Ты не можешь сейчас поставить, либо разраб долбаеб, либо ты')
     }
     betMoney = test()
-    console.log(betMoney)
-
     if(betMoney > money || betMoney == 0){
         countDolbaeb++
         alert("Нормальное число напиши")
@@ -205,7 +206,7 @@ let bet = () => {
             console.log('Это как нужно было заебаться, чтобы блять 10 раз сначала ввести ненормальное число и 10 раз блять нажать в алерте ОК, это пиздец, чел')
         }
     }else{
-        $('#beted').text('$' + betMoney)
+        $('#beted').text('Your bet: $' + betMoney)
         $('.dolbaeb').remove()
         canPlay = true
         canBet = false
@@ -227,23 +228,23 @@ let test = () =>{
     
     return str
 }
-
+let restartCount = 0
 let giveMoney = () => {
     win ? money += betMoney * 1 : -1
     lose ? money -= betMoney * 1 : -1
     draw ? money = money : -1
 
-    // if(win){
-    //     console.log('ТЫ ПОБЕДИЛ!')
-    // }
+    win ? $('#giveMoney').css('color', 'green').text('+ $' + betMoney) : -1
+    lose ? $('#giveMoney').css('color', 'red').text('- $' + betMoney) : -1
 
     $('#money').text('$' + money)
     restartButton()
-    
+    restartCount++
 }
 let newGame = () => {
     casicTotal = 0
     myTotal = 0
+    restartCount = 0
     $('.cart').remove()
     $('#hidden').remove()
     $('.total').text('0')
@@ -268,10 +269,95 @@ let newGame = () => {
     $('.carts').css('display', 'none')
     $('.total').css('display', 'none')
 
+    $('#giveMoney').text('')
+
 }
 
 let countOchko = 0
 let ochko = () => {
-    countOchko == 0 ? $('#to').text('Очко') : $('#to').text('Blackjack')
-    countOchko == 0 ? countOchko++ : countOchko--
+    if(countOchko == 0){
+        $('#to').text(' Очко ')
+        countOchko++
+        $('link[rel="stylesheet"]').remove()
+        $('head').append('<link rel="stylesheet" href="css2.css">')
+    }
+    else{
+        $('#to').text('Blackjack')
+        countOchko--
+        $('link[rel="stylesheet"]').remove()
+        $('head').append('<link rel="stylesheet" href="css.css">')
+    }
+}
+let canUse = []
+let someCart
+let prices = []
+let pricesHelp
+let chanse = () => {
+    canUse = []
+    for(let n = 1; n < 5;n++){
+        for(let i = 1;i < 14;i++){
+            someCart = number[i] + ' ' + suit[n]
+            if(used.includes(someCart)){
+                -1
+            }else{
+                canUse.push(someCart)
+            }
+            
+        }
+    }
+    
+    for(let i = 0;i < canUse.length;i++){
+        pricesHelp = canUse[i].replace(/..$/, '')
+        if(myTotal > 11 || casicTotal > 11){
+            pricesHelp = pricesHelp.replace(/A/, '1')
+        }else{
+            pricesHelp = pricesHelp.replace(/A/, '11')
+        }
+        pricesHelp = pricesHelp.replace(/J/, '10')
+        pricesHelp = pricesHelp.replace(/Q/, '10')
+        pricesHelp = pricesHelp.replace(/K/, '10')
+        prices.push(pricesHelp)
+    }
+    prices.sort()
+    count(prices)
+    
+    percentage = {
+        1:  names[1] != undefined? Math.round((names[1]  / canUse.length) * 100) + '%' : 0,
+        2:  Math.round((names[2]  / canUse.length) * 100) + '%',
+        3:  Math.round((names[3]  / canUse.length) * 100) + '%',
+        4:  Math.round((names[4]  / canUse.length) * 100) + '%',
+        5:  Math.round((names[5]  / canUse.length) * 100) + '%',
+        6:  Math.round((names[6]  / canUse.length) * 100) + '%',
+        7:  Math.round((names[7]  / canUse.length) * 100) + '%',
+        8:  Math.round((names[8]  / canUse.length) * 100) + '%',
+        9:  Math.round((names[9]  / canUse.length) * 100) + '%',
+        10: Math.round((names[10] / canUse.length) * 100) + '%',
+        11: names[11] != undefined ? Math.round((names[11] / canUse.length) * 100) + '%' : 0,
+    }
+
+    return percentage
+}
+
+
+let percentage = {}
+
+
+let names = {}
+let count = (array) => {
+    array.forEach(item => {
+        names[item] = (names[item] || 0) + 1
+    })
+    return names
+}
+let sumOfAll = 0
+let sumAll = () => {
+    for(let i = 1; i < 11;i++){
+        (names[i] / canUse.length) != NaN ? sumOfAll += names[i] / canUse.length: -1
+    }
+    return sumOfAll
+}
+
+let someShit = () => {
+    $('link[rel="stylesheet"]').remove()
+    $('head').append('<link rel="stylesheet" href="css.css">')
 }

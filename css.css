@@ -1,6 +1,8 @@
 html,body{
     height: 100%;
     width: 100%;
+    color: white;
+    overflow: hidden;
 }
 #wrapper{
     display: flex;
@@ -22,7 +24,7 @@ body{
     /* background: linear-gradient(#205300 0%,#346e03 70%, #205300 100%); */
     background: radial-gradient(#3e8105, #1c4800);
     font-family: 'Montserrat';
-
+    user-select: none;
 }
 
 #casic{
@@ -34,10 +36,10 @@ body{
 .carts{
     width: fit-content;
     height: fit-content;
-    outline: 1px solid rgb(0, 0, 0);
+    /* outline: 1px solid rgb(0, 0, 0); */
     margin: 10px;
     padding: 10px;
-    background: #e7e7e78c;
+    /* background: #e7e7e78c; */
     display: none;
 }
 .total{
@@ -45,6 +47,8 @@ body{
     height: fit-content;
     margin: 10px;
     display: none;
+    font-size: 18px;
+    text-shadow: 0px 0px 2px black;
 }
 .help{
     display: flex;
@@ -162,6 +166,7 @@ body{
 .cart{
     /* text-decoration: underline; */
     margin: 4px;
+    text-shadow: 0px 0px 2px black;
     /* outline: 1px solid cornflowerblue; */
 }
 .cart::after{
@@ -172,6 +177,7 @@ body{
 }
 #hidden{
     margin: 4px;
+    text-shadow: 0px 0px 2px black;
 }
 #hidden::before{
     content: '[';
@@ -196,6 +202,8 @@ body{
     text-shadow: 0px 0px 3px black;
     font-size: 19px;
     text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
 }
 #to::before{
     content: '♥♣';
