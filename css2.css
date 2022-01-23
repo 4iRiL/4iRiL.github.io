@@ -1,7 +1,7 @@
 html,body{
-    height: 99%;
-    width: 99%;
-    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     user-select: none;
 }
 #wrapper{

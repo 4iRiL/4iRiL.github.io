@@ -275,6 +275,7 @@ let newGame = () => {
 
 let countOchko = 0
 async function ochko(){
+    $('#ochkoBlind').remove()
     if(countOchko == 0){
         makeBlind()
         await sleep(1000)
@@ -293,8 +294,8 @@ async function ochko(){
     }
 }
 let makeBlind = () => {
-    let color = countOchko == 0 ? '#1D1B26' : '#3e8105'
-    jQuery('<div/>').css({
+    let color = countOchko == 0 ? '#1D1B26' : '#225201'
+    jQuery('<div/>',{'id': 'ochkoBlind'}).css({
         'width' : '100%',
         'height' : '0px',
         'background' : color,
@@ -302,7 +303,7 @@ let makeBlind = () => {
         'top' : '0px',
         'left' : '0px',
         'animation' : 'blind 2.5s cubic-bezier(0.63, 0.09, 0.61, 0.74)',
-    }).appendTo($('body'))
+    }).appendTo($('html'))
 }
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -376,4 +377,4 @@ let sumAll = () => {
     }
     return sumOfAll
 }
-
+console.log('23.01.22 version')

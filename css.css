@@ -2,8 +2,7 @@ html,body{
     height: 100%;
     width: 100%;
     color: white;
-    overflow-x: hidden;
-
+    overflow: hidden;
 }
 #wrapper{
     display: flex;
@@ -24,11 +23,11 @@ body{
     user-select: none;
     font-family: 'Montserrat', sans-serif;
     position: relative;
+    overflow: hidden;
 }
 
 #casic{
     width: 100%;
-
 }
 
 .carts{
