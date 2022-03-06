@@ -64,8 +64,7 @@ let beginHeart = () => {
     cv.closePath()
     console.log(i)
 }
-let count_someOther = 0
 let someOther = () => {
-    count_someOther == 0 ? setInterval(beginHeart, 20) : -1
-    
+    setInterval(beginHeart, 20)
+    $('#canv').css('cursor', 'none')   
 }
