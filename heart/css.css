@@ -1,8 +1,10 @@
-body, html{
-    width: 100%;
+@media screen and (min-width: 790px) {
+    body, html{
+    width: 100vw;
     height: 100%;
     padding: 0px;
     margin: 0px;
+    overflow: hidden;
 }
 body{
     display: flex;
@@ -12,4 +14,31 @@ body{
 canvas{
     border: 1px solid;
     cursor: pointer;
+}
+}
+
+
+@media screen and (max-width: 790px) {
+    html,body{
+        width: 100vw;
+        height: 100vh;
+        padding: 0px;
+        margin: 0px;
+        overflow: hidden;
+    }
+    body{
+        /* display: flex; */
+        background-color: black;
+        /* justify-content: center; */
+    }
+    canvas{
+        border: 1px solid;
+        /* margin-left: 10%; */
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }   
 }
