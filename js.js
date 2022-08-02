@@ -31,23 +31,23 @@ let cartValue
 let countEbuchiy = 0
 let generate = () => {
     cartValue = rng(1,13)
-    if(cartValue > 10){
+    if (cartValue > 10){ 
         cartValue = 10
     }
     value = number[cartValue]
     cart = value + ' ' +  suit[rng(1, 4)]
-    if(used.includes(cart)){
+    if (used.includes(cart)) {
         // console.log('Карта уже есть на столе, шуллер ебучий')
         countEbuchiy++
-        if(countEbuchiy > 100){
+        if (countEbuchiy > 100) {
             used = []
             console.log('Тут начался какой-то пиздец, поэтому я взял новую колоду')
             countEbuchiy = 0
         }
         generate()
-    }else{
+    } else {
         used.push(cart)
-        if(used.length > 41){
+        if (used.length > 41) {
             console.log('Карт в колоде осталось мало, так что я пожалуй возьму новую')
             used = []
         }
@@ -60,21 +60,22 @@ let lose = false
 let win = false
 let draw = false
 let haveAce = false
+
 let take = () => {
 
-    
-
-    if(canPlay == false){
+    if (canPlay === false) {
         return console.log('Сделай ставку, чтобы начать игру')
     }
-    generate()
 
-    if(myTotal < 11 && cartValue == 1){
+    generate()
+    console.log('Выдана карта ' + cart)
+    
+    if (myTotal < 11 && cartValue == 1) {
         cartValue = 11 
         haveAce = true
     }
     myTotal += cartValue
-    if(haveAce == true && myTotal > 21){
+    if(haveAce === true && myTotal > 21){
         myTotal -= 10
         haveAce = false
     }
@@ -94,9 +95,9 @@ let take = () => {
     }
 
     $('#myTotal').text(myTotal)
-
     
 }
+
 let restartButton = ()=>{
     $('.action1').remove()
     $('.action2').remove()
@@ -110,8 +111,10 @@ let restartButton = ()=>{
         'class' : 'button'
     }).text('New game').appendTo($('#actions'))
 }
+
 let hiddenCart
 let gameStart = ()=>{
+
     //Достаем карту для казика
     generate()
     if(casicTotal < 11 && cartValue == 1){
@@ -122,7 +125,7 @@ let gameStart = ()=>{
     generate()
     hiddenCart = cart
     casicTotal += cartValue
-    jQuery('<span/>', {'id':'hidden'}).text('H').appendTo('.casicCarts')
+    jQuery('<span/>', {'id':'hidden', 'onclick':'showChanses()'}).text('H').appendTo('.casicCarts')
 
     //Достаем карту для игрока
 
@@ -233,13 +236,23 @@ let giveMoney = () => {
     win ? money += betMoney * 1 : -1
     lose ? money -= betMoney * 1 : -1
     draw ? money = money : -1
-
+    changeIco()
     win ? $('#giveMoney').css('color', 'green').text('+ $' + betMoney) : -1
     lose ? $('#giveMoney').css('color', 'red').text('- $' + betMoney) : -1
 
     $('#money').text('$' + money)
     restartButton()
     restartCount++
+}
+let changeIco = () => {
+    if(win){
+        $('link[rel = "shortcut icon"]').remove()
+        $('head').append('<link rel="shortcut icon" href="clown.png" type="image/x-icon">')
+    }
+    if(lose){
+        $('link[rel = "shortcut icon"]').remove()
+        $('head').append('<link rel="shortcut icon" href="crying.png" type="image/x-icon">')
+    }
 }
 let newGame = () => {
     casicTotal = 0
@@ -253,6 +266,7 @@ let newGame = () => {
     draw = false
     canPlay = false
     canBet = true
+    haveAce = false
 
     $('#restartButton').remove()
     jQuery('<div/>', {
@@ -282,7 +296,7 @@ async function ochko(){
         $('#to').text(' Очко ')
         countOchko++
         $('link[rel="stylesheet"]').remove()
-        $('head').append('<link rel="stylesheet" href="css2.css">')
+        $('head').append('<link rel="stylesheet" href="css/css2.css">')
     }
     else{
         makeBlind()
@@ -290,7 +304,7 @@ async function ochko(){
         $('#to').text('Blackjack')
         countOchko--
         $('link[rel="stylesheet"]').remove()
-        $('head').append('<link rel="stylesheet" href="css.css">')
+        $('head').append('<link rel="stylesheet" href="css/css.css">')
     }
 }
 let makeBlind = () => {
@@ -314,7 +328,7 @@ let someCart
 let prices = []
 let pricesHelp
 let chanse = () => {
-    canUse = []
+    canUse = [hiddenCart]
     for(let n = 1; n < 5;n++){
         for(let i = 1;i < 14;i++){
             someCart = number[i] + ' ' + suit[n]
@@ -343,28 +357,128 @@ let chanse = () => {
     count(prices)
     
     percentage = {
-        1:  names[1] != undefined? Math.round((names[1]  / canUse.length) * 100) + '%' : 0,
-        2:  Math.round((names[2]  / canUse.length) * 100) + '%',
-        3:  Math.round((names[3]  / canUse.length) * 100) + '%',
-        4:  Math.round((names[4]  / canUse.length) * 100) + '%',
-        5:  Math.round((names[5]  / canUse.length) * 100) + '%',
-        6:  Math.round((names[6]  / canUse.length) * 100) + '%',
-        7:  Math.round((names[7]  / canUse.length) * 100) + '%',
-        8:  Math.round((names[8]  / canUse.length) * 100) + '%',
-        9:  Math.round((names[9]  / canUse.length) * 100) + '%',
-        10: Math.round((names[10] / canUse.length) * 100) + '%',
-        11: names[11] != undefined ? Math.round((names[11] / canUse.length) * 100) + '%' : 0,
+        1:  names[1] != undefined? ph(1) : 0,
+        2:  ph(2),
+        3:  ph(3),
+        4:  ph(4),
+        5:  ph(5),
+        6:  ph(6),
+        7:  ph(7),
+        8:  ph(8),
+        9:  ph(9),
+        10: ph(10),
+        11: names[11] != undefined ? ph(11) : 0,
     }
+    // Нажимая, я хочу увидеть шансы на победу у меня и у бота ебаного 
+    // Шансы на победу если я нажму take и pass
+    // Нужно учитывать что у бота есть карта H
+    // т.е нужно учитывать что там может быть любое число, но у него 100% не 21 в сумме 
+    // Шансы на победу у меня - это сумма шансов на победу через take and pass
+
+    // Нужно ещё не забыть про ничью
+
+    
+    // 1) найти шансы на победу у бота
+    // 2) найти шансы на победу через take
+    // 3) найти шансы на победу через pass
+    // 4) тут уже просто доработать небольшие моментики
+
+    // Шансы на победу у бота, это найти кол-во ситуаций, где у него < 21 and > myTotal
+    // Кол-во ситуаций когда > 22
+    // Суммируем кол-во этих ситуаций
+    // Легчайше высчитываем
+
 
     return percentage
 }
 
+let bot = () => {
+    canUse = [hiddenCart]
+    for(let n = 1; n < 5;n++){
+        for(let i = 1;i < 14;i++){
+            someCart = number[i] + ' ' + suit[n]
+            if(used.includes(someCart)){
+                -1
+            }else{
+                canUse.push(someCart)
+            }
+            
+        }
+    }
 
+    let valueSee = casicTotal - hiddenCart.replace(/..$/, '')
+    let needToWinMin = myTotal - valueSee + 1
+    let needToWinMax = 21 - valueSee
+    needToWinMin < 0 ? needToWinMin = 0 : -1
+
+    let allBotCan = []
+    for(let i = needToWinMin;i <= needToWinMax;i++){
+        allBotCan.push(i)
+    }
+    let countBotWin = 0
+    let countBotLose = 0
+    let valueCanStart = valueSee
+    let botHaveAce = false
+    let n = 0
+    let deck = 0
+
+    let allSituations = (i, valueCan) =>{ 
+        console.log('valuseCan = ', valueCan)
+        console.log('n = ', i)
+
+        if(i > canUse.length){
+            return "Колода закончилась " + deck++
+        }
+
+        CanUseVal = canUse[i].replace(/..$/, '')
+
+        if(valueCan > 11){
+            CanUseVal = CanUseVal.replace(/A/, '1')
+        }else{
+            CanUseVal = CanUseVal.replace(/A/, '11')
+            botHaveAce = true
+        }
+
+        CanUseVal = CanUseVal.replace(/J/, '10')
+        CanUseVal = CanUseVal.replace(/Q/, '10')
+        CanUseVal = CanUseVal.replace(/K/, '10')
+
+        valueCan += CanUseVal * 1
+
+        i++
+        
+        if(valueCan > myTotal && valueCan < 22){ //подходит для победы бота, если нажать пас
+            countBotWin++
+            allSituations(i, valueSee)
+        }
+        if(valueCan > 21 && botHaveAce){ // если больше но есть туз, дающий 11
+            botHaveAce = false
+            valueCan -= 10
+            allSituations(i, valueCan)
+        }
+
+        if(valueCan > 21 && botHaveAce == false){ // если сумма больше и нету туза, дающенго 11
+            countBotLose++
+            allSituations(i, valueSee)
+        }
+
+        if(valueCan < 21 && valueCan < myTotal){ // сумма недостаточная чтобы выиграть
+            allSituations(i, valueCan)
+        }
+
+    }
+
+    allSituations(n, valueSee)
+    return console.log('countWin = ' + countBotWin + '; countLose = ' + countBotLose )
+}
+
+let ph = num => Math.round((names[num] / canUse.length) * 100) + '%'
 let percentage = {}
 
 
 let names = {}
-let count = (array) => {
+let count = array => {
+    names = {}
     array.forEach(item => {
         names[item] = (names[item] || 0) + 1
     })
@@ -377,4 +491,9 @@ let sumAll = () => {
     }
     return sumOfAll
 }
-console.log('23.01.22 version')
+
+let showChanses = () => {
+
+}
+
+console.log('25.01.22 version')

@@ -1,0 +1,211 @@
+html,body{
+    height: 100%;
+    width: 100%;
+    color: white;
+    overflow: hidden;
+}
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border: 5px solid rgb(182, 109, 37);
+    width: 80%;
+    height: 70%;
+    min-height: 500px;
+    justify-content: space-evenly;
+    max-width: 500px;
+    border-radius: 20%;
+    box-shadow: 0px 3px 0px 2px rgb(92, 66, 18), 3px 7px 4px 2px rgb(49, 39, 39) ;
+    background: transparent;
+}
+body{
+    background: radial-gradient(#3e8105, #1c4800);
+    user-select: none;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+#casic{
+    width: 100%;
+}
+
+.carts{
+    width: fit-content;
+    height: fit-content;
+    margin: 10px;
+    padding: 10px;
+    display: none;
+}
+.total{
+    width: fit-content; 
+    height: fit-content;
+    margin: 10px;
+    display: none;
+    font-size: 18px;
+    text-shadow: 0px 0px 2px black;
+}
+.help{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left,#00000000, #35a965cb, #00000000);
+    width: 80%;
+    min-height: 90px;
+    margin: auto;
+}
+#actions{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#actions > div{
+    width: fit-content;
+    margin: 5px;
+    padding: 3px;
+    user-select: none;
+    cursor: pointer;
+}
+.button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 10px 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #f1c40f;
+    border-radius: 8px;
+    font-family: 'Montserrat';
+    color: #f1c40f;
+    transition: .2s ease-in-out;
+    user-select: none;
+    cursor: pointer;
+    background: white;
+  }
+  .button:before {
+    content: "";
+    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    transform: skewX(-45deg);
+  }
+  .button:hover {
+    background: #f1c40f;
+    color: #fff;
+  }
+  .button:hover:before {
+    left: 150px;
+    transition: .5s ease-in-out;
+  }
+#head{
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center
+}
+#hidden{
+    padding: 2px;
+}
+#idkName{
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+#idkName > div {
+    padding: 3px 5px;
+}
+#idkName > input[type='text']{
+    width: 66px;
+    font-size: 17px;
+    border-radius: 5px;
+    border: 1px solid #f1c40f;
+    background-color: white;
+    color: #f1c40f;
+    padding: 2px;
+    font-family: 'Montserrat';
+}
+#idkName > input[type='text']:focus-visible{
+    outline: 1px solid #f1c40f;
+}
+#idkName > input[type='text']:hover{
+    background: #f1c40f;
+    color: #fff;  
+}
+#idkName > input[type='text']:hover:before {
+    left: 150px;
+    transition: .5s ease-in-out;
+}
+#idkName > input[type='text']:before {
+    content: "";
+    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    transform: skewX(-45deg);
+  }
+.cart{
+    margin: 4px;
+    text-shadow: 0px 0px 2px black;
+}
+.cart::after{
+    content: ']';
+}
+.cart::before{
+    content: '[';
+}
+#hidden{
+    margin: 4px;
+    text-shadow: 0px 0px 2px black;
+}
+#hidden::before{
+    content: '[';
+}
+#hidden::after{
+    content: ']';
+}
+.dolbaeb{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff4757;
+    font-size: large;
+    background-color: #eccc68;
+    text-shadow: 1px 1px 0px black;
+}
+
+#to{
+    font-weight: 600;
+    color: #c0392b;
+    text-shadow: 0px 0px 3px black;
+    font-size: 19px;
+    text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
+}
+#to::before{
+    content: '♥♣';
+    color: #f1c40f
+}
+#to::after{
+    content: '♠♦';
+    color: #f1c40f
+}
+#left{
+    content: '♥';
+}
+
+@keyframes blind{
+    0%{height: 0px;}
+    40%{height: 100%;top: 0px}
+    100%{top: 100%;height: 100%}
+}
