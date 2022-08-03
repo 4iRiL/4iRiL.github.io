@@ -81,9 +81,11 @@ let take = () => {
     }
     myTotal > 21 ? lose = true : -1
     jQuery('<span/>',{'class': 'cart'}).text(cart).appendTo('.myCarts')
+    
 
     if(lose){
         console.log('you lose this game')
+        canPlay = false
         lose = true
         giveMoney()
 
@@ -91,6 +93,7 @@ let take = () => {
     myTotal == 21 ? win = true : -1
     if(win){
         console.log('You win!')
+        canPlay = false
         giveMoney()
     }
 
@@ -492,8 +495,69 @@ let sumAll = () => {
     return sumOfAll
 }
 
-let showChanses = () => {
-
+let plus = () => {
+    let betMoney = test()
+    if (betMoney == 0) {
+        if (money < 1000) {
+            $('#betInput').val(money)
+        } else {
+            $('#betInput').val('1000')
+        }
+    } else {
+        let betMoney = parseInt($('#betInput').val())
+        let money10 = Math.round(betMoney / 10) + betMoney
+        if (money < money10) {
+            $('#betInput').val(money)
+        } else {
+            $('#betInput').val(money10)
+        }
+    }
 }
+
+let minus = () => {
+    let betMoney = parseInt($('#betInput').val())
+    let money10 = betMoney - Math.round(betMoney / 10)
+
+    if (money10 < 5) {
+        $('#betInput').val(Math.round(money / 10))
+    } else {
+        $('#betInput').val(money10)
+    }
+
+    
+}
+
+// Реакция на клавиатуру
+
+document.addEventListener('keydown', event => {
+
+    // J - take
+    if (event.code == 'KeyJ') {
+        take()
+    }
+    // K - pass
+    if (event.code == 'KeyK') {
+        pass()
+    }
+    // L - bet 
+    if (event.code == 'KeyL') {
+        bet()
+    }
+    // "+" - повысить на 10%, если не поставлена, поставить 1к или всё
+    if (event.code == 'Equal') {
+        plus()
+    }
+    // "-" - понизить на 10%
+    if (event.code == 'Minus') {
+        minus()
+    }
+
+    if (event.code == 'KeyO') {
+        ochko()
+    }
+})
+  
+
+
 
 console.log('25.01.22 version')
